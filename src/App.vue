@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- llamar el router-view para q se carguen los componentes, si no las estamos llamando a ningún lugar -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Main from './components/Main.vue'
 
 export default {
   name: 'app',
+  // declarar los componentes que se utilizan dentro de este Vue file
   components: {
-    HelloWorld
+    Main
   }
 }
 </script>
