@@ -1,19 +1,21 @@
 <template>
   <div class="wrapper">
-    <form class="filter" @submit.prevent="onSubmit">
+
+    <div>
       <label for="search">Indica tu búsqueda: </label>
       <input id="search" type="text" v-model="busqueda">
-      <input type="submit" value="Submit">
-    </form>
+    </div>
 
-    <label><input type="radio" v-model="isActive" value="todos" />Todos</label>
-    <label><input type="radio" v-model="isActive" value="active" />Activo</label>
-    <label><input type="radio" v-model="isActive" value="inactive" />No activo</label>
+    <div>
+      <label><input type="radio" v-model="isActive" value="todos" />Todos</label>
+      <label><input type="radio" v-model="isActive" value="active" />Activo</label>
+      <label><input type="radio" v-model="isActive" value="inactive" />No activo</label>      
+    </div>
 
     <ul>
       <ListadoUsers v-for="user in getFilteredUsers" 
-          :key="user.id"
-          :user="user"/>
+                    :key="user.id"
+                    :user="user"/>
     </ul>
   </div>
 </template>
@@ -35,11 +37,7 @@ export default {
       busqueda: ''
     }
   },
-  methods: {
-    onSubmit () {
-      this.getFilteredUsers;
-    }
-  },
+  // los valores referenciados desde data se han de llamar como this.
   computed: {
     getActiveUsers () {
       let estado = this.isActive;
@@ -56,11 +54,12 @@ export default {
       if (this.busqueda === '') {
         return this.getActiveUsers;
       } else {
-        return this.getActiveUsers.filter(user => user.pais === this.busqueda) 
+        return this.getActiveUsers.filter(user => 
+                user.pais.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "")
+                .includes(this.busqueda.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ""))); 
       }
     }
   },
-  // los valores referenciados dentro de created se han de llamar como this.
   created () {
     users.getUsers(users => {
       this.users = users;

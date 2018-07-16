@@ -9,7 +9,7 @@
         </li>
 
         <button >
-            <!-- otra opción para pasar el to del router link:
+            <!-- otra opción para pasar el :to del router link:
                 un objeto que incluye el nombre del path (declarado en el router)
                 y el valor que referenciamos como params -->
             <router-link :to="{name: 'details', params: {id: user.id}}"> Detalles</router-link>

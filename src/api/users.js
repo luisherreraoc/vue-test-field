@@ -77,5 +77,12 @@ export default {
     },
     getSingleUser (id) {
         return users.find(user => user.id === id)
+    },
+    updateUser (id, data) {
+        let user = this.getSingleUser(id);
+
+        user.name = data.name;
+        user.apellido = data.apellido;
+        user.activo = data.estado;
     }
 }
