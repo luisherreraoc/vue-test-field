@@ -31,12 +31,9 @@ export default {
 <!-- el style scoped hace q este CSS solo se aplique al componente donde se monta -->
 <style scoped>
     .li-wrapper {
-        border: 1px solid grey;
-        border-bottom: none;
-        padding-top: 10px;
-        padding-bottom: 10px;
-    }
-    .li-wrapper:last-child {
-        border-bottom: 1px solid grey;
+        padding: 20px 40px;
+        margin: 10px auto;
+        width: 250px;
+        height: 100px;
     }
 </style>

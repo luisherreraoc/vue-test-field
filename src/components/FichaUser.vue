@@ -4,16 +4,11 @@
             <form>
                 <p>
                     <label for="nombre">Nombre </label>
-                    <input type="text" v-model="nombre">    
+                    <input type="text" v-model="nombre" :placeholder="user.name">    
                 </p>
                 <p>
                     <label for="apellido">Apellido </label>
-                    <input type="text" v-model="apellido">
-                </p>
-
-                <p>
-                    <label for="estado" v-if="!user.activo">Activar usuario? <input type="radio" name="estado" v-model="estado" value="true"></label>
-                    <label for="estado" v-else>Desactivar usuario? <input type="radio" name="estado" v-model="estado" value="false"></label>
+                    <input type="text" v-model="apellido" :placeholder="user.apellido">
                 </p>
 
                 <p>
@@ -50,7 +45,6 @@ export default {
             user: {},
             nombre: '',
             apellido: '',
-            estado: '',
             editar: false
         }
     },
@@ -63,21 +57,16 @@ export default {
             this.editar = !this.editar;
         },
         onSubmit () {
-            let activo;
-            if (this.estado === 'true') {
-                activo = true;
-            } else {
-                activo = false;
-            }
             let data = {
                 'name': this.nombre,
                 'apellido': this.apellido,
-                'activo': activo
             }
-
+            
             users.updateUser(this.id, data);
 
             this.editar = false;
+            this.nombre = '';
+            this.apellido = '';
         }
     }
 }

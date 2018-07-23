@@ -2,7 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // importar los componentes que se van llamar en cada route
 import Main from './components/Main.vue'
-import FichaUser from './components/FichaUser.vue'
+// lazy loading
+const FichaUser = () => import('./components/FichaUser.vue')
 
 Vue.use(Router)
 
