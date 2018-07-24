@@ -3,15 +3,15 @@
     <ul v-show="totalPages > 1" class="pagination">
       <li class="arrow">
         <!-- javascript:void(0) evaluates to undefined, therefore the browser does not redirect anywhere on click -->
-        <a class="page-link" href="javascript:void(0)" @click="prev">&lt;</a>
+        <a class="page-link" @click="prev">&lt;</a>
       </li>
 
       <li :class="activeClass(pageNum)" v-for="pageNum in totalPages" :key="pageNum">
-        <a class="page-link" href="javascript:void(0)" @click="setPage(pageNum)">{{ pageNum }}</a>
+        <a class="page-link" @click="setPage(pageNum)">{{ pageNum }}</a>
       </li>
 
       <li class="arrow">
-        <a class="page-link" href="javascript:void(0)" @click="next">&gt;</a>
+        <a class="page-link" @click="next">&gt;</a>
       </li>
     </ul>
   </div>
@@ -90,9 +90,13 @@ a {
 }
 
 li {
-    width: 20%;
+    width: 25%;
     background-color: rgb(221, 235, 232);
     box-shadow: 3px 3px rgb(210, 224, 221);
+}
+
+li :hover {
+  cursor:pointer;
 }
 
 .active {

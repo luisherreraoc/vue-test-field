@@ -19,12 +19,18 @@
 
     </div>
 
-      <div>
-        <p>Mostrar usuarios con estado: </p>
-        <label><input type="radio" v-model="isActive" value="todos" />Todos</label>
-        <label><input type="radio" v-model="isActive" value="active" />Activo</label>
-        <label><input type="radio" v-model="isActive" value="inactive" />No activo</label>      
-      </div>      
+    <div>
+      <p>Mostrar usuarios con estado: </p>
+      <div class="radio-wrap">
+        <input id="all" type="radio" class="radio-btn" v-model="isActive" value="todos" />
+        <label class="radio-lbl" for="all"> Todos</label>
+        <input id="active" type="radio" class="radio-btn" v-model="isActive" value="active" />
+        <label class="radio-lbl" for="active"> Activo</label>
+        <input id="inactive" type="radio" class="radio-btn" v-model="isActive" value="inactive" />
+        <label class="radio-lbl" for="inactive"> No activo</label>           
+      </div>
+   
+    </div>      
 
     <ul class="users-wrapper">
       <!-- al usar v-for, Vue nos pedirá por defecto q a cada valor de la iteration le demos una :key única -->
@@ -39,9 +45,9 @@
       <p>Mostrar por página: </p>
       <!-- cuando queremos bindear un valor a un input del tipo boolean o number utilizamos el v-bind (:) -->
       <!-- sin el bind el valor q le pasamos será directamente una string -->
-      <label><input type="radio" v-model="mostrar" :value=6 />6</label>
-      <label><input type="radio" v-model="mostrar" :value=12 />12</label>
-      <label><input type="radio" v-model="mostrar" :value=16 />16</label>      
+      <input type="radio" v-model="mostrar" :value=6 /><label> 6 </label>
+      <input type="radio" v-model="mostrar" :value=12 /><label> 12 </label>
+      <input type="radio" v-model="mostrar" :value=16 /><label> 16 </label>      
     </div>    
 
   </div>
@@ -126,30 +132,96 @@ export default {
 
 <!-- el style scoped hace q este CSS solo se aplique al componente donde se monta -->
 <style scoped>
-  h3 {
-    margin: 40px 0 0;
-  }
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  li {
-    margin: 0 10px;
-  }
-  .wrapper {
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  margin: 0 10px;
+}
 
-  .search-wrap {
-    display: flex; 
-    justify-content: space-evenly;
-  }
+select {
+  background-color: rgb(205, 219, 216);
+  border: 1px solid rgb(181, 192, 190)
+}
 
-  .users-wrapper {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
+.wrapper {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-wrap {
+  display: flex; 
+  justify-content: space-evenly;
+  background-color: rgb(211, 226, 223);
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 3px 3px rgb(205, 219, 216);
+}
+
+.radio-wrap {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.users-wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+/* de https://codepen.io/raubaca/pen/ONzBxP */
+
+.radio-btn {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.radio-lbl {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 10px;
+  line-height: 36px;
+  cursor: pointer;
+}
+.radio-lbl::before {
+  content: " ";
+  position: absolute;
+  top: 6px;
+  left: 0;
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgb(194, 204, 202);
+  border-radius: 4px;
+  z-index: -1;
+}
+.radio-btn + .radio-lbl::before {
+  border-radius: 18px;
+}
+/* Checked */
+.radio-btn:checked + .radio-lbl {
+  padding-left: 10px;
+  color: #fff;
+}
+.radio-btn:checked + .radio-lbl::before {
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(194, 204, 202);
+}
+/* Transition */
+.radio-lbl,
+.radio-lbl::before {
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
 </style>
