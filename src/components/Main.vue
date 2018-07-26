@@ -43,12 +43,15 @@
     <Pagination v-model="page" :items="getFilteredUsers.length" :perPage="mostrar"/>
 
     <div>
-      <p>Mostrar por página: </p>
+      <label for="mostrar">Mostrar por página: </label>
       <!-- cuando queremos bindear un valor a un input del tipo boolean o number utilizamos el v-bind (:) -->
       <!-- sin el bind el valor q le pasamos será directamente una string -->
-      <input type="radio" v-model="mostrar" :value=6 /><label> 6 </label>
-      <input type="radio" v-model="mostrar" :value=12 /><label> 12 </label>
-      <input type="radio" v-model="mostrar" :value=16 /><label> 16 </label>      
+      <select v-model="mostrar" name="mostrar" id="mostrar">
+        <option :value=6 > 6 </option>
+        <option :value=12 > 12 </option>
+        <option :value=16 > 16 </option>   
+      </select>
+   
     </div>    
 
   </div>
