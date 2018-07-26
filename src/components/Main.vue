@@ -32,12 +32,13 @@
    
     </div>      
 
-    <ul class="users-wrapper">
+    <div class="users-wrapper">
       <!-- al usar v-for, Vue nos pedirá por defecto q a cada valor de la iteration le demos una :key única -->
       <ListadoUsers v-for="user in usersPerPage" 
                     :key="user.id"
                     :user="user"/>
-    </ul>
+      
+    </div>
 
     <Pagination v-model="page" :items="getFilteredUsers.length" :perPage="mostrar"/>
 
@@ -134,13 +135,6 @@ export default {
 <style scoped>
 h3 {
   margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  margin: 0 10px;
 }
 
 select {

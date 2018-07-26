@@ -153,5 +153,14 @@ export default {
 
         user.name = data.name;
         user.apellido = data.apellido;
+    },
+    archiveUser (id) {
+        let currentUser = users.find(user =>user.id === id);
+        for (let user of users) {
+            if (user == currentUser) {
+                users.splice(user, 1);
+            }
+        }
+        return users;
     }
 }
