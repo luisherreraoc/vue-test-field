@@ -1,12 +1,14 @@
 <template>
     <div class="wrapper">
-        <p>
-            {{ user.name }} 
-            {{ user.apellido }}
-        </p>
-        <p>
-            {{ user.email }}
-        </p>
+        <div class="user-info">
+            <p>
+                {{ user.name }} 
+                {{ user.apellido }}
+            </p>
+            <p>
+                {{ user.email }}
+            </p>            
+        </div>
         <!-- otra opción para pasar el :to del router link:
             un objeto que incluye el nombre del path (declarado en el router)
             y el valor que referenciamos como params -->
@@ -54,5 +56,12 @@ export default {
         display: flex;
         justify-content: space-around;
         padding: 10px;
+    }
+    .user-info {
+        padding: 10px;
+        background-color: rgb(194, 211, 208);
+        border: 1px solid rgb(168, 180, 178);
+        border-radius: 4px;
+        box-shadow: 2px 2px rgb(168, 180, 178);
     }
 </style>

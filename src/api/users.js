@@ -156,9 +156,9 @@ export default {
     },
     archiveUser (id) {
         let currentUser = users.find(user =>user.id === id);
-        for (let user of users) {
-            if (user == currentUser) {
-                users.splice(user, 1);
+        for (let i=0; i<users.length; i++) {
+            if (users[i] == currentUser) {
+                users.splice(i, 1);
             }
         }
         return users;
