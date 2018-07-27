@@ -1,22 +1,8 @@
 <template>
     <div>
-        <div class="form-container" v-if="editar" @submit.prevent="onSubmit">
-            <form>
-                <p>
-                    <label for="nombre">Nombre </label>
-                    <input type="text" v-model="nombre" :placeholder="user.name">    
-                </p>
-                <p>
-                    <label for="apellido">Apellido </label>
-                    <input type="text" v-model="apellido" :placeholder="user.apellido">
-                </p>
-
-                <p>
-                    <input type="submit" value="Actualizar">
-                </p>
-            </form>
-
-            <button @click="toggleEdit">Volver a la info.</button>
+        <div class="form-container" v-if="editar">
+            <Form :user="user"
+                  @ver-info="toggleEdit"/>
         </div>
         <div v-else class="info-container">
             <p>ID: {{ user.id }}</p>
@@ -37,14 +23,16 @@
 import users from '@/api/users'
 
 export default {
+    components: {
+        // lazyload, no se carga este componente hasta que es llamado (en este caso, al cumplirse el if)
+        Form: () => import('./Form.vue')
+    },
     // al estarle pasando el params de la route, se declara como props
     // de esta forma se puede usar dentro de todo el componente
     props: ['id'],
     data () {
         return {
             user: {},
-            nombre: '',
-            apellido: '',
             editar: false
         }
     },
@@ -55,18 +43,6 @@ export default {
     methods: {
         toggleEdit () {
             this.editar = !this.editar;
-        },
-        onSubmit () {
-            let data = {
-                'name': this.nombre,
-                'apellido': this.apellido,
-            }
-            
-            users.updateUser(this.id, data);
-
-            this.editar = false;
-            this.nombre = '';
-            this.apellido = '';
         }
     }
 }
