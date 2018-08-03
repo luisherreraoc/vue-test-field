@@ -5,14 +5,14 @@
                   @ver-info="toggleEdit"/>
         </div>
         <div v-else class="info-container">
-            <p>ID: {{ user.id }}</p>
-            <p>Nombre: {{ user.name }} {{ user.apellido }}</p>
+            <h2>ID: {{ user.id }}</h2>
+            <h3>Nombre: {{ user.name }} {{ user.apellido }}</h3>
             <p>E-mail: {{ user.email }}</p>
             <p>Pais: {{ user.pais }}</p>
             <p>NIF: {{ user.NIF }}</p>
             <p>{{ user.activo ? 'Usuario activo' : 'Usuario inactivo' }}</p>
 
-            <button @click="toggleEdit">Editar</button>
+            <i class="fas fa-user-edit" @click="toggleEdit"></i>
         </div>
 
         <router-link to="/">Volver al listado</router-link>
@@ -48,6 +48,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scope>
+.fas {
+    color: rgb(165, 179, 176);
+    font-size: 20px;
+}
 </style>

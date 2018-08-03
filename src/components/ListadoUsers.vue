@@ -14,8 +14,25 @@
             y el valor que referenciamos como params -->
         <p class="edit-options">
             <router-link class="goTo" :to="{name: 'details', params: {id: user.id}}"><i class="fas fa-address-card"></i></router-link>
-            <i @click="deleteUser(user.id)" class="fas fa-archive"></i>
+            <i @click="showDialog = true" class="fas fa-archive"></i>
         </p>
+        <md-dialog :md-active.sync="showDialog">
+            <div class="dialog-container">
+                <h3>¿Deseas archivar este usuario?</h3>
+                <div class="dialog-buttons-container">
+                    <div class="yes-container">
+                        <i class="fas fa-check-circle" @click="deleteUser(user.id)"></i>
+                        <p>Confirmar</p>                    
+                    </div>
+                    <div class="no-container">
+                        <i class="fas fa-times-circle" @click="showDialog = false"></i>
+                        <p>Cancelar</p>                         
+                    </div>               
+                </div>
+
+            </div>
+
+        </md-dialog>
     </div>    
 </template>
 
@@ -27,6 +44,11 @@ export default {
         user: {
             type: Object,
             required: true
+        }
+    },
+    data: () => {
+        return {
+            showDialog: false
         }
     },
     methods: {
@@ -62,6 +84,21 @@ export default {
         background-color: rgb(194, 211, 208);
         border: 1px solid rgb(168, 180, 178);
         border-radius: 4px;
-        box-shadow: 2px 2px rgb(168, 180, 178);
+        box-shadow: 1.5px 1.5px rgb(168, 180, 178), -1px 1px rgb(168, 180, 178);
+    }
+    .dialog-container {
+        padding: 20px;
+        font-family: 'Avenir', Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-align: center;
+        color: #2c3e50;
+    }
+    .dialog-buttons-container {
+        display: flex;
+        justify-content: space-around;
+    }
+    .dialog-buttons-container p {
+        margin: 0;
     }
 </style>
