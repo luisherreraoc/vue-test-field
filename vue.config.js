@@ -4,22 +4,19 @@
 
 // relevant code ex.:
 
-// module.exports = {
-//     configureWebpack: {
-//         plugins: [
-//         new MyAwesomeWebpackPlugin()
-//         ]
-//     }
-// }
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
 
     pages: {
         app: {
+            // indicar los files de referencia 
             entry: 'src/main.js',
-            template: 'index.html',
+            template: 'public/index.html',
+            // nombre del file q obtendremos
             filename: 'index.html',
             title: 'HOME',
+            // los chunks q vamos a crear, vendors se crea siempre
             chunks: ['chunk-vendors', 'listadousers', 'pagination']
         },
         
@@ -36,8 +33,15 @@ module.exports = {
     configureWebpack: {  
         optimization: {
             splitChunks: {
+                // diversas opciones: async, all o initial. Recomendados async o all
                 chunks: "all",
+                // minSize: 30000,
+                // minChunks: 1,
+                // maxAsyncRequests: 5,
+                // maxInitialRequests: 3,
+                // name: true,
                 cacheGroups: {
+                    // test da la referencia del nombre del archivo q se tiene q encontrar y separar
                     vendors: {
                         test: /[\\/]node_modules[\\/]/,
                         priority: -10
@@ -50,10 +54,6 @@ module.exports = {
                         test: /[\\/]src[\\/]components[\\/]Pagination/,
                         minSize: 0
                     },
-                    // FichaUser: {
-                    //     test: /[\\/]src[\\/]components[\\/]FichaUser/,
-                    //     minSize: 0
-                    // },
                     default: {
                         minChunks: 2,
                         priority: -20,
@@ -61,6 +61,14 @@ module.exports = {
                     }
                 }
             }
-        },
-    }
+        },    
+        plugins: [
+            new HtmlWebpackPlugin({
+                // se ordena inyectar en el cuerpo del .html los scripts q estaremos generando y necesario en el runtime 
+                template: 'public/index.html',
+                inject: 'body',
+            })
+        ]
+    },
+
 };
